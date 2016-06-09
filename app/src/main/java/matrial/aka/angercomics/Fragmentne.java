@@ -35,20 +35,30 @@ public class Fragmentne extends Fragment {
         }
 
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new RecyclerView.ViewHolder(mLayoutInflater.inflate(R.layout.)) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ViewHolder(mLayoutInflater.inflate(R.layout.recycler_item_rage_comic,parent,false));
 
-            };
+
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+         final int imageResId = mImageResId[position];
+            final String name = mName[position];
+            final String descriptions = mDescription[position];
+            final String url = mUrl[position];
+            holder.setData(imageResId, name);
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mName.length;
+        }
+        class ViewHolder extends RecyclerView.ViewHolder{
+
+            public ViewHolder(View inflate) {
+                super(inflate);
+            }
         }
     }
 
@@ -58,6 +68,7 @@ public class Fragmentne extends Fragment {
         return inflater.inflate(R.layout.fragment_one, container, false);
 
     }
+
 
 }
 
