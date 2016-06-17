@@ -2,6 +2,10 @@ package matrial.aka.angercomics;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,11 +32,49 @@ public class Fragmentne extends Fragment {
 
     }
 
-    class FragmentAdapter extends RecyclerView.Adapter<ViewHolder> {
+@Override
+public void onAttach (Context context)
+{
+    super.onAttach(context);
+    // get rage face name and descriptions
+
+    final Resources resources = context.getResources();
+    mName = resources.getStringArray(R.array.names);
+    mDescription = resources.getStringArray(R.array.descriptions);
+    mUrl = resources.getStringArray(R.array.urls);
+
+
+    // get rage face image
+
+    final TypedArray typedarray =resources.obtainTypedArray(R.array.image);
+    final int imageCount = mName.length;
+    mImageResId = new int[imageCount];
+    for (int i =0; i< imageCount ; i++){
+        mImageResId[i]=typedarray.getResourceId(i,0);
+    }
+    typedarray.recycle();
+
+}
+// creating the fragment
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+
+
+
+
+
+
+
+
+    class RageComicAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         private LayoutInflater mLayoutInflater;
 
-        public FragmentAdapter(Context contect) {
+        public RageComicAdapter(Context contect) {
             mLayoutInflater = LayoutInflater.from(contect);
         }
 
@@ -58,20 +100,19 @@ public class Fragmentne extends Fragment {
         }
     }
         class ViewHolder extends RecyclerView.ViewHolder {
-
-
+            //views
             private ImageView mimageview;
             private TextView mNameTextview;
 
-            public ViewHolder(View itemview) {
-                super(itemview);
+            private ViewHolder(View itemView) {
+                super(itemView);
                 //get reference to  image and name
-                mimageview = (ImageView) itemview.findViewById(R.id.comic_image);
-                mNameTextview = (TextView) itemview.findViewById(R.id.name);
+                mimageview = (ImageView) itemView.findViewById(R.id.comic_image);
+                mNameTextview = (TextView) itemView.findViewById(R.id.name);
 
             }
 
-            private void         setData(int imageResId, String name) {
+            private void setData(int imageResId, String name) {
                 mimageview.setImageResource(imageResId);
                 mNameTextview.setText(name);
 

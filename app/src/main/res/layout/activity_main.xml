@@ -9,11 +9,7 @@
     android:paddingTop="@dimen/recycler_margin_vertical">
 
 
-    <fragment
-        android:id="@+id/details_fragment"
-        class="matrial.aka.angercomics.RageComicDetails_Fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
 
 
