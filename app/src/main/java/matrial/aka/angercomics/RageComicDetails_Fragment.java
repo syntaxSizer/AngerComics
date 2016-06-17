@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  */
 public class RageComicDetails_Fragment extends Fragment {
 
-
+// factory method to call the constructor
     public static RageComicDetails_Fragment newInstance () {
         return new RageComicDetails_Fragment();
 
@@ -26,6 +26,6 @@ public class RageComicDetails_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_rage_comics_details,container,false);
     }
 }
