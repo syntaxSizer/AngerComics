@@ -71,7 +71,7 @@ public class Fragmentne extends Fragment {
 
             }
 
-            private void setData(int imageResId, String name) {
+            private void         setData(int imageResId, String name) {
                 mimageview.setImageResource(imageResId);
                 mNameTextview.setText(name);
 
