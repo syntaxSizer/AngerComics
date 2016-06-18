@@ -1,6 +1,6 @@
 package matrial.aka.angercomics;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
+
 
 /**
  * Created by geckozila on 17/06/16.
@@ -20,8 +22,7 @@ public class RageComicDetails_Fragment extends Fragment {
     private static final String ARGUMENT_URL = "url";
 
 // factory method to call the constructor
-    public static RageComicDetails_Fragment  public static RageComicDetails_Fragment newInstance(int imageResId, String name,
-                                                                                               String description, String url) {
+    public static RageComicDetails_Fragment   newInstance(int imageResId, String name, String description, String url) {
 
         final Bundle args = new Bundle();
         args.putInt(ARGUMENT_IMAGE_RES_ID, imageResId);
@@ -31,10 +32,8 @@ public class RageComicDetails_Fragment extends Fragment {
         final RageComicDetails_Fragment fragment = new RageComicDetails_Fragment();
         fragment.setArguments(args);
         return fragment;
-    } {
-        return new RageComicDetails_Fragment();
-
     }
+
 
     // empty constructor
     public RageComicDetails_Fragment() {

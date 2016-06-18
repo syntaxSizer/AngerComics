@@ -1,9 +1,7 @@
 package matrial.aka.angercomics;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
@@ -19,7 +17,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.root_layout, Fragment.newInstance(), "rageComicList")
+                    .add(R.id.root_layout, Fragmentne.newInstace(), "rageComicList")
                     .commit();
         }
     }
@@ -31,9 +29,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.root_layout, detailsFragment, "rageComicDetails")
-                //the backstack allow the user to go back to the full list using the back button
                 .addToBackStack(null)
                 .commit();
     }
-
 }
