@@ -1,11 +1,13 @@
 package matrial.aka.angercomics;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,8 @@ public class Fragmentne extends Fragment {
     private String[] mName;
     private String[] mDescription;
     private String[] mUrl;
+    private OnRageComicSelected mListener;
+
 
     public static Fragmentne newInstace() {
         return new Fragmentne();
@@ -35,8 +39,18 @@ public class Fragmentne extends Fragment {
 @Override
 public void onAttach (Context context)
 {
+    // this code access the resources
     super.onAttach(context);
     // get rage face name and descriptions
+
+//    This initializes the listener reference
+    if (context instanceof OnRageComicSelected) {
+        mListener = (OnRageComicSelected) context;
+    } else {
+        throw new ClassCastException(context.toString() + " must implement OnRageComicSelected.");
+    }
+
+
 
     final Resources resources = context.getResources();
     mName = resources.getStringArray(R.array.names);
@@ -59,7 +73,15 @@ public void onAttach (Context context)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        final View view = inflater.inflate(R.layout.fragment_rage_comic_list,container,false);
+
+
+
+        final Activity activity =getActivity();
+        final RecyclerView recyclerview = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerview.setLayoutManager(new GridLayoutManager(activity,2));
+        recyclerview.setAdapter(new RageComicAdapter(activity));
+        return view;
     }
 
 
@@ -89,9 +111,16 @@ public void onAttach (Context context)
         public void onBindViewHolder(ViewHolder holder, final int position) {
             final int imageResId = mImageResId[position];
             final String name = mName[position];
-            final String descriptions = mDescription[position];
+            final String description = mDescription[position];
             final String url = mUrl[position];
+
             holder.setData(imageResId, name);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onRageComicSelected(imageResId, name, description, url);
+                }
+            });
         }
 
         @Override
@@ -117,5 +146,8 @@ public void onAttach (Context context)
                 mNameTextview.setText(name);
 
         }
+    }
+    public interface OnRageComicSelected{
+        void onRageComicSelected(int imageResId, String name, String url , String description );
     }
 }
