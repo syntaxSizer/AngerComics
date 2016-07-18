@@ -1,2 +1,2 @@
 #AngerComics
-is an android app about funny comic rage characters
+is an android app about funny comic anger characters
